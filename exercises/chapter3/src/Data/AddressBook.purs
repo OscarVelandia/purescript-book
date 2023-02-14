@@ -6,6 +6,7 @@ import Prelude
 import Control.Plus (empty)
 import Data.List (List(..), filter, head)
 import Data.Maybe (Maybe)
+
 -- ANCHOR_END: imports
 
 -- ANCHOR: Address
@@ -62,9 +63,8 @@ insertEntry = Cons
 findEntry :: String -> String -> AddressBook -> Maybe Entry
 -- ANCHOR_END: findEntry_signature
 -- ANCHOR: findEntry_implementation
-findEntry firstName lastName = head <<< filter filterEntry
+findEntry firstName lastName = filter filterEntry >>> head
   where
 -- ANCHOR_END: findEntry_implementation
-  filterEntry :: Entry -> Boolean
-  filterEntry entry = entry.firstName == firstName && entry.lastName == lastName
-
+    filterEntry :: Entry -> Boolean
+    filterEntry entry = entry.firstName == firstName && entry.lastName == lastName
